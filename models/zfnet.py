@@ -1,47 +1,52 @@
 import numpy as np
 import tensorflow as tf
 from keras.callbacks import ReduceLROnPlateau
-from keras.layers import Dense, MaxPooling2D, Flatten, Conv2D, Dropout
+from keras.layers import Dense, MaxPooling2D, Flatten, Conv2D, Lambda
 from keras.models import Sequential
 from mlxtend.evaluate import accuracy
+from tensorflow.keras.optimizers import Adam,RMSprop,SGD
+from tensorflow.keras.optimizers import SGD
+from tensorflow.python.keras.metrics import TopKCategoricalAccuracy
 
 
 def zfnet_model(input_shape, classes):
     model = Sequential()
-    model.add(Conv2D(filters=96, kernel_size=(7, 7), strides=(2, 2), padding="valid", activation="relu",
-                     kernel_initializer="uniform", input_shape=input_shape))
 
-    model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
+    model.add(Conv2D(filters=96, kernel_size=(7, 7), strides=(2, 2), activation="relu", input_shape=input_shape))
+    model.add(MaxPooling2D(3, strides=2))
+    model.add(Lambda(lambda x: tf.image.per_image_standardization(x)))
 
-    model.add(Conv2D(filters=256, kernel_size=(5, 5), strides=(2, 2), padding="same",
-                     activation="relu", kernel_initializer="uniform"))
+    model.add(Conv2D(filters=256, kernel_size=(5, 5), strides=(2, 2), activation="relu"))
+    model.add(MaxPooling2D(3, strides=2))
+    model.add(Lambda(lambda x: tf.image.per_image_standardization(x)))
 
-    model.add(MaxPooling2D(pool_size=(3, 3), strides=(2, 2)))
-    model.add(Conv2D(filters=384, kernel_size=(3, 3), strides=(1, 1), padding="same",
-                     kernel_initializer="uniform"))
+    model.add(Conv2D(filters=384, kernel_size=(3, 3), activation="relu"))
 
-    model.add(Conv2D(filters=384, kernel_size=(3, 3), strides=(1, 1), padding="same",
-                     kernel_initializer="uniform"))
-    model.add(Conv2D(filters=256, kernel_size=(5, 5), strides=(1, 1), padding="same",
-                     activation="relu", kernel_initializer="uniform"))
+    model.add(Conv2D(filters=384, kernel_size=(3, 3), activation="relu"))
 
-    model.add(MaxPooling2D(pool_size=(3, 3), strides=(2, 2)))
+    model.add(Conv2D(filters=256, kernel_size=(3, 3), activation="relu"))
+
+    model.add(MaxPooling2D(3, strides=2))
 
     model.add(Flatten())
-    model.add(Dense(4096, activation="relu"))
-    model.add(Dropout(0.5))
-    model.add(Dense(units=4096, activation="relu"))
-    model.add(Dropout(0.5))
+    model.add(Dense(4096))
+    model.add(Dense(units=4096))
     model.add(Dense(units=classes, activation="softmax"))
 
     print(model.summary())
-    model.compile(optimizer='adam', loss=tf.losses.SparseCategoricalCrossentropy(from_logits=True), metrics='accuracy')
-
-    return model
+    # model.compile(optimizer=SGD(lr=0.01, momentum=0.9), loss='categorical_crossentropy',
+    #               metrics=['accuracy', TopKCategoricalAccuracy(1)])
+    # model.compile(optimizer='nadam', loss='binary_crossentropy', metrics=['accuracy'])
+    model.compile(optimizer=SGD(lr=0.01, momentum=0.9), loss='binary_crossentropy', metrics=['accuracy'])
+    reduce_lr = tf.keras.callbacks.ReduceLROnPlateau(monitor='val_loss',
+                                                     factor=0.1, patience=1, min_lr=0.00001)
+    # reduce_lr=0
+    return model, reduce_lr
 
 
 if __name__ == '__main__':
-
+    input_shape = (224, 224, 1)
+    model = zfnet_model(input_shape, 2)
     # train, val = load_img("../data/chest_xray/chest_xray/train", "data/chest_xray/chest_xray/val")
 
     # plot_img(train)
@@ -104,23 +109,23 @@ if __name__ == '__main__':
 
     model = zfnet_model(input_shape=(267, 267, 3), classes=1000)
 
-    ### fitting the model
+    ### fitting the models
     learning_rate_reduction = ReduceLROnPlateau(monitor='val_accuracy', patience=2, verbose=1, factor=0.3,
                                                 min_lr=0.000001)
     model.compile(
         optimizer='adam',
         loss=tf.losses.SparseCategoricalCrossentropy(from_logits=True),
         metrics=['accuracy'])
-    # history = model.fit(train, y_train, batch_size=10,epochs=10, callbacks=[learning_rate_reduction])
+    # history = models.fit(train, y_train, batch_size=10,epochs=10, callbacks=[learning_rate_reduction])
     model.fit(
         train,
         validation_data=val,
         epochs=3
     )
 
-    # history = model.fit(x_train, y_train, batch_size=10,epochs=10,
+    # history = models.fit(x_train, y_train, batch_size=10,epochs=10,
     #                         validation_data=data_generator.flow(x_val, y_val), callbacks=[learning_rate_reduction])
 
-    # accuracy = model.evaluate(x_test, y_test, verbose=0)
+    # accuracy = models.evaluate(x_test, y_test, verbose=0)
 
     print(accuracy)
