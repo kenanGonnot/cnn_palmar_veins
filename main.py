@@ -5,6 +5,7 @@ import tensorflow as tf
 
 from models.VGG16 import vgg_model
 from models.depthwise_conv import depthwise_conv_model
+from models.old_zfnet_model import old_zfnet_model
 from models.zfnet import zfnet_model
 from utils.utils import load_img, load_augmented_data
 
@@ -33,15 +34,14 @@ if __name__ == '__main__':
     # model = vgg_model()
     # model = depthwise_conv_model()
     model, reduce_lr = zfnet_model(input_shape, classes)
-    #
-    model.fit(train, validation_data=valid, epochs=5, batch_size=5, callbacks=[reduce_lr])
-    # model.fit(train, validation_data=valid, epochs=5, batch_size=5)
-    #
-    val = model.evaluate(valid, steps=200)
-    print("Accuracy: " + str(val)[1])
+    # model = old_zfnet_model(input_shape, classes)
+    # model.fit(train, validation_data=valid, epochs=4, batch_size=5, callbacks=[reduce_lr])
+    # model.fit(train, validation_data=valid, epochs=1, batch_size=32)
+    model.fit(train, validation_data=valid, epochs=100, batch_size=32, callbacks=[reduce_lr])
+    val = model.evaluate(valid)
+    print("Accuracy: " + str(val[1]))
 
 
 
 
 
-    # convnet()

@@ -14,11 +14,11 @@ def zfnet_model(input_shape, classes):
 
     model.add(Conv2D(filters=96, kernel_size=(7, 7), strides=(2, 2), activation="relu", input_shape=input_shape))
     model.add(MaxPooling2D(3, strides=2))
-    model.add(Lambda(lambda x: tf.image.per_image_standardization(x)))
+    # model.add(Lambda(lambda x: tf.image.per_image_standardization(x)))
 
     model.add(Conv2D(filters=256, kernel_size=(5, 5), strides=(2, 2), activation="relu"))
     model.add(MaxPooling2D(3, strides=2))
-    model.add(Lambda(lambda x: tf.image.per_image_standardization(x)))
+    # model.add(Lambda(lambda x: tf.image.per_image_standardization(x)))
 
     model.add(Conv2D(filters=384, kernel_size=(3, 3), activation="relu"))
 
@@ -36,8 +36,8 @@ def zfnet_model(input_shape, classes):
     print(model.summary())
     # model.compile(optimizer=SGD(lr=0.01, momentum=0.9), loss='categorical_crossentropy',
     #               metrics=['accuracy', TopKCategoricalAccuracy(1)])
-    # model.compile(optimizer='nadam', loss='binary_crossentropy', metrics=['accuracy'])
-    model.compile(optimizer=SGD(lr=0.01, momentum=0.9), loss='binary_crossentropy', metrics=['accuracy'])
+    model.compile(optimizer='nadam', loss='binary_crossentropy', metrics=['accuracy'])
+    # model.compile(optimizer=SGD(lr=0.01, momentum=0.9), loss='binary_crossentropy', metrics=['accuracy'])
     reduce_lr = tf.keras.callbacks.ReduceLROnPlateau(monitor='val_loss',
                                                      factor=0.1, patience=1, min_lr=0.00001)
     # reduce_lr=0
