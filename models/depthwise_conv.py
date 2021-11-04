@@ -23,7 +23,9 @@ def depthwise_conv_model():
     model.add(Dense(1, activation='sigmoid'))
 
     print(model.summary())
-    model.compile(optimizer=Adam(.001), loss='binary_crossentropy', metrics=['accuracy'])
+    print("\n ================= depthwise CONV model ================= \n")
+
+    model.compile(optimizer='nadam', loss='binary_crossentropy', metrics=['accuracy'])
     return model
 
 
