@@ -7,6 +7,7 @@ import cv2
 import numpy as np
 import tensorflow as tf
 from keras.preprocessing.image import ImageDataGenerator
+from keras.utils.np_utils import to_categorical
 from matplotlib import pyplot as plt
 
 labels = ['PNEUMONIA', 'NORMAL']
@@ -96,6 +97,29 @@ def plot_scores(train):
     plt.title('Scores')
     plt.legend()
     plt.show()
+
+def previsualization_normalization_data(X_train, X_test, X_val, y_train, y_test, y_val, Nombre_classes, Classes):
+    print("\n--------------------------------")
+    print("X_train shape : {}".format(X_train.shape))
+    print("--------------------------------")
+    print("y_train shape : {}".format(y_train.shape))
+    print("--------------------------------")
+    print("Nombre_classes = %d" % Nombre_classes)
+    print("--------------------------------")
+    print("Classes:", Classes)
+    print("--------------------------------")
+    plot_img(X_train, y_train, Classes)
+    X_train = X_train / 255.
+    X_test = X_test / 255.
+    X_val = X_val / 255.
+    # X_train = X_train.reshape(X_train.shape[0], 224, 224, 1)  # add dimension => 4D tensor
+    # X_test = X_test.reshape(X_test.shape[0], 224, 224, 1)
+    # X_val = X_val.reshape(X_val.shape[0], 224, 224, 1)
+    y_train = to_categorical(y_train)
+    y_test = to_categorical(y_test)
+    y_val = to_categorical(y_val)
+    return X_train, X_test, X_val, y_train, y_test, y_val
+
 
 def load_img(data_dir_train, data_dir_val):
     batch_size = 32
