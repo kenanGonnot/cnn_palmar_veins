@@ -1,7 +1,7 @@
 import numpy as np
 import tensorflow as tf
 from keras.callbacks import ReduceLROnPlateau
-from keras.layers import Dense, MaxPooling2D, Flatten, Conv2D, Lambda
+from keras.layers import Dense, MaxPooling2D, Flatten, Conv2D, Lambda, Dropout
 from keras.models import Sequential
 from mlxtend.evaluate import accuracy
 from tensorflow.keras.optimizers import Adam,RMSprop,SGD
@@ -11,32 +11,40 @@ from tensorflow.python.keras.metrics import TopKCategoricalAccuracy
 
 def zfnet_model(input_shape, classes):
     model = Sequential()
+    model.add(Conv2D(filters=96, kernel_size=(7, 7), strides=(2, 2), padding="valid", activation="LeakyReLU",
+                     kernel_initializer="uniform", input_shape=input_shape))
 
-    model.add(Conv2D(filters=96, kernel_size=(7, 7), strides=(2, 2), activation="relu", input_shape=input_shape))
-    model.add(MaxPooling2D(3, strides=2))
+    model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
     # model.add(Lambda(lambda x: tf.image.per_image_standardization(x)))
 
-    model.add(Conv2D(filters=256, kernel_size=(5, 5), strides=(2, 2), activation="relu"))
-    model.add(MaxPooling2D(3, strides=2))
+    model.add(Conv2D(filters=256, kernel_size=(5, 5), strides=(2, 2), padding="same",
+                     activation="LeakyReLU", kernel_initializer="uniform"))
+
+    model.add(MaxPooling2D(pool_size=(3, 3), strides=(2, 2)))
     # model.add(Lambda(lambda x: tf.image.per_image_standardization(x)))
 
-    model.add(Conv2D(filters=384, kernel_size=(3, 3), activation="relu"))
+    model.add(Conv2D(filters=384, kernel_size=(3, 3), strides=(1, 1), padding="same",
+                     kernel_initializer="uniform"))
 
-    model.add(Conv2D(filters=384, kernel_size=(3, 3), activation="relu"))
+    model.add(Conv2D(filters=384, kernel_size=(3, 3), strides=(1, 1), padding="same",
+                     kernel_initializer="uniform"))
+    model.add(Conv2D(filters=256, kernel_size=(5, 5), strides=(1, 1), padding="same",
+                     activation="LeakyReLU", kernel_initializer="uniform"))
 
-    model.add(Conv2D(filters=256, kernel_size=(3, 3), activation="relu"))
-
-    model.add(MaxPooling2D(3, strides=2))
+    model.add(MaxPooling2D(pool_size=(3, 3), strides=(2, 2)))
 
     model.add(Flatten())
-    model.add(Dense(4096))
-    model.add(Dense(units=4096))
+    model.add(Dense(4096, activation="LeakyReLU"))
+    model.add(Dropout(0.5))
+    model.add(Dense(units=4096, activation="LeakyReLU"))
+    model.add(Dropout(0.5))
     model.add(Dense(units=classes, activation="softmax"))
 
     print(model.summary())
+    print("\n ================= ZFNET model ================= \n")
     # model.compile(optimizer=SGD(lr=0.01, momentum=0.9), loss='categorical_crossentropy',
     #               metrics=['accuracy', TopKCategoricalAccuracy(1)])
-    model.compile(optimizer='nadam', loss='binary_crossentropy', metrics=['accuracy'])
+    model.compile(optimizer='nadam', loss='categorical_crossentropy', metrics=['accuracy'])
     # model.compile(optimizer=SGD(lr=0.01, momentum=0.9), loss='binary_crossentropy', metrics=['accuracy'])
     reduce_lr = tf.keras.callbacks.ReduceLROnPlateau(monitor='val_loss',
                                                      factor=0.1, patience=1, min_lr=0.00001)

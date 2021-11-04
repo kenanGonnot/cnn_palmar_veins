@@ -37,6 +37,8 @@ def vgg_model():
     model.add(Dense(1, activation='sigmoid'))
 
     print(model.summary())
+    print("\n ================= VGG16 model ================= \n")
+
     model.compile(optimizer=SGD(.001), loss='binary_crossentropy', metrics='accuracy')
 
     return model
