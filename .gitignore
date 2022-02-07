@@ -75,3 +75,6 @@ fabric.properties
 /data/chest_xray/
 /data/
 /data/chest_xray/
+/saved_model/
+
+!/.ipynb_checkpoints/
