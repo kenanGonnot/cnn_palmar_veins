@@ -1,5 +1,7 @@
 Flask==2.0.2
 keras==2.6.0
-numpy==1.21.2
-tensorflow==2.6.0
-cv2==4.5.1
+# numpy==1.21.2
+# tensorflow==2.5.0
+# cv2==4.5.1
+# opencv-python==4.5.4
+# opencv-python==4.5.5.62

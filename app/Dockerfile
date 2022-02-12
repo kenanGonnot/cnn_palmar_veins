@@ -1,4 +1,6 @@
 FROM python:3.8-alpine
+
+RUN mkdir /app
 WORKDIR /app
 
 #RUN apk --update --upgrade add --no-cache  gcc musl-dev jpeg-dev zlib-dev libffi-dev cairo-dev pango-dev gdk-pixbuf-dev
@@ -11,4 +13,4 @@ EXPOSE 5000
 
 COPY . /app
 
-CMD [ "python", "app.py" ]
+CMD [ "python", "test-flask.py" ]
