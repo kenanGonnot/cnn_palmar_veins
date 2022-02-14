@@ -6,7 +6,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="../static/img/apple-icon.png">
     <link rel="icon" type="image/png" href="./static/img/favicon.png">
     <title>
-        {% block title%}    Palm veins recognition    {% endblock %}
+        {% block title%} Palm veins recognition {% endblock %}
     </title>
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css"
@@ -20,7 +20,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- CSS Files -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/material-dashboard.css') }}" id="pagestyle">
-<!--    <link id="pagestyle" href="./static/css/material-dashboard.css?v=3.0.0" rel="stylesheet"/>-->
+    <!--    <link id="pagestyle" href="./static/css/material-dashboard.css?v=3.0.0" rel="stylesheet"/>-->
 </head>
 
 <body class="g-sidenav-show bg-dark" background-color="#344767">
@@ -29,16 +29,19 @@
 {% endblock %}
 
 <footer class="footer py-4" align="center">
-    <div class="container-fluid">
-        <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-                <div class="copyright text-center text-sm text-muted text-lg-start">
-                    <label>© 2020 Copyright:</label>
-                </div>
+    <div class="container-fluid" align="center">
+        <div class="row align-items-center justify-content-lg-between" align="center">
+            <div class="copyright text-center text-sm text-muted text-lg-start" align="center">
+                <label>© 2022 Copyright: Palm veins recognition by Kenan, Fayçal and Lorenzo</label>
             </div>
         </div>
     </div>
 </footer>
 
+<script src="./assets/js/core/popper.min.js"></script>
+<script src="./assets/js/core/bootstrap.min.js"></script>
+<script src="./assets/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="./assets/js/plugins/smooth-scrollbar.min.js"></script>
+<script src="./assets/js/plugins/chartjs.min.js"></script>
 </body>
 </html>
