@@ -1,8 +1,10 @@
 import os
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
+
+list_users = ["kenan", "faycal", "lorenzo"]
 
 
 @app.route('/')
@@ -15,14 +17,31 @@ def test():
     return render_template('test.html', content=["hugo", "patrik", "dandy"], r=2)
 
 
-@app.route('/verification')
-def verification():
-    return render_template('verification.html')
-
-
 @app.route('/identification')
 def identification():
     return render_template('identification.html')
+
+
+@app.route('/verification', methods=["POST", "GET"])
+def verification():
+    if request.method == "POST":
+        user = request.form["username"]
+        for usr in list_users:
+            if user == usr:
+                return redirect(url_for('connected', usr=user))
+        return redirect(url_for('error', error="Username not found"))
+    else:
+        return render_template('verification.html')
+
+
+@app.route('/connected/<usr>')
+def connected(usr):
+    return render_template('connected.html', usr=usr)
+
+
+@app.route('/error/<error>')
+def error(error):
+    return render_template('error.html', error=error)
 
 
 # @app.route('/admin')
