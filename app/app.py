@@ -1,84 +1,54 @@
-from io import BytesIO
+import os
 
-import cv2
-import numpy as np
-from flask import Flask, request, jsonify, send_from_directory
-from werkzeug.utils import secure_filename
-
-from app.utils import load_pretrained_model
-
-UPLOAD_FOLDER = '/Users/jheaton/test/'
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
-IMAGE_WIDTH = 128
-IMAGE_HEIGHT = 128
-IMAGE_CHANNELS = 1
-
-
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
-
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-# Load pretrained models
-model_architecture_path = '../saved_model/model_identification_500users_40epochs.json'
-model_weights_path = '../saved_model/model_identification_500users_40epochs.h5'
-model = load_pretrained_model(model_architecture_path, model_weights_path)
+list_users = ["kenan", "faycal", "lorenzo"]
 
 
-@app.route('/', methods=['GET'])
-def send_index():
-    return send_from_directory('./www', "index.html")
+@app.route('/')
+def home():
+    return render_template('home.html')
 
 
-@app.route('/<path:path>', methods=['GET'])
-def send_root(path):
-    return send_from_directory('./www', path)
+@app.route('/test/')
+def test():
+    return render_template('test.html', content=["hugo", "patrik", "dandy"], r=2)
 
 
-@app.route('/api/image', methods=['POST'])
-def upload_image():
-    # check if the post request has the file part
-    if 'image' not in request.files:
-        return jsonify({'error': 'No posted image. Should be attribute named image.'})
-    file = request.files['image']
+@app.route('/identification')
+def identification():
+    return render_template('identification.html')
 
-    # if user does not select file, browser also
-    # submit a empty part without filename
-    if file.filename == '':
-        return jsonify({'error': 'Empty filename submitted.'})
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        x = []
-        # ImageFile.LOAD_TRUNCATED_IMAGES = False
-        # img = Image.open(BytesIO(file.read()))
-        # img.load()
-        # img = img.resize((IMAGE_WIDTH, IMAGE_HEIGHT), Image.ANTIALIAS)
-        # x = image.img_to_array(img)
-        # x = np.expand_dims(x, axis=0)
-        # x = preprocess_input(x)
-        # x = x[:, :, :, 0:3]
-        # pred = model.predict(x)
-        # lst = decode_predictions(pred, top=5)
-        items = []
-        # for itm in lst[0]:
-        #     items.append({'name': itm[1], 'prob': float(itm[2])})
 
-        img = cv2.imread(BytesIO(file.read()), cv2.IMREAD_GRAYSCALE)
-        img = cv2.resize(img, (IMAGE_WIDTH, IMAGE_HEIGHT))
-        X = np.expand_dims(img, axis=0)
-        pred = model.predict(X)
-        items.append({'User id :': np.argmax(pred), 'prob': float(max(pred))})
-
-        response = {'pred': items}
-        print(response)
-        return jsonify(response)
+@app.route('/verification', methods=["POST", "GET"])
+def verification():
+    if request.method == "POST":
+        user = request.form["username"]
+        for usr in list_users:
+            if user == usr:
+                return redirect(url_for('connected', usr=user))
+        return redirect(url_for('error', error="Username not found"))
     else:
-        return jsonify({'error': 'File has invalid extension'})
+        return render_template('verification.html')
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+@app.route('/connected/<usr>')
+def connected(usr):
+    return render_template('connected.html', usr=usr)
+
+
+@app.route('/error/<error>')
+def error(error):
+    return render_template('error.html', error=error)
+
+
+# @app.route('/admin')
+# def admin():
+#     return redirect(url_for('/home'))
+
+
+if __name__ == "__main__":
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=True, host='0.0.0.0', port=port)
