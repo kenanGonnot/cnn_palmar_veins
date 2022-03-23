@@ -34,7 +34,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  # ignore tensorflow warnings
 warnings.filterwarnings("ignore")
 
 
-path_data = "../data/data_palm_vein/NIR"
+path_data = "../../data/data_palm_vein/NIR"
 
 train = tf.keras.preprocessing.image_dataset_from_directory(
     path_data,

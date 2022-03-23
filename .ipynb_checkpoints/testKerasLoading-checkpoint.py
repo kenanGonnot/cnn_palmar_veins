@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
 
-from models.zfnet import zfnet_model
+from models.zfnet.zfnet import zfnet_model
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  # ignore tensorflow warnings
 warnings.filterwarnings("ignore")

@@ -8,7 +8,7 @@ from tqdm import tqdm
 import cv2
 import numpy as np
 
-from models.zfnet import zfnet_model
+from models.zfnet.zfnet import zfnet_model
 
 
 def load_img(path, xdim=180, ydim=180):
@@ -42,7 +42,7 @@ def load_img(path, xdim=180, ydim=180):
 
 
 if __name__ == '__main__':
-    path = "../data/data_palm_vein/NIR"
+    path = "../../data/data_palm_vein/NIR"
 
     X, y, label_names = load_img(path)
 
