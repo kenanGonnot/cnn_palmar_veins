@@ -1,0 +1,86 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--{% extends "base.html"%}-->
+
+<!--{% block content %}-->
+
+<!--<body class="g-sidenav-show bg-dark" background-color="#344767">-->
+
+
+<!--<div align="center">-->
+<!--    &lt;!&ndash;    <img src="assets/images/demo.png" class="center" align="center" width=40% display="block" text-align="center">&ndash;&gt;-->
+<!--    <button class="btn btn-icon btn-2 btn-primary" onclick="location.href='/'"-->
+<!--            style="margin-top: 1% ; box-shadow: 0 3px 3px 0 rgba(19, 3, 6, 0.15), 0 3px 1px -2px rgba(10, 0, 3, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.15)"-->
+<!--            type="button">-->
+<!--        <span class="btn-inner&#45;&#45;icon" style="color: whitesmoke"><i class="fa fa-home"></i></span>-->
+<!--        <span class="btn-inner&#45;&#45;text">Home</span>-->
+<!--    </button>-->
+<!--    <h3 style="color: whitesmoke; margin-bottom: 4%; margin-top: 1.5%">Palm veins identification</h3>-->
+<!--</div>-->
+
+<!--<div align="center">-->
+<!--    <h2>Select a file to upload</h2>-->
+<!--    <p>-->
+<!--        {% with messages = get_flashed_messages() %}-->
+<!--        {% if messages %}-->
+<!--    <ul>-->
+<!--        {% for message in messages %}-->
+<!--        <li>{{ message }}</li>-->
+<!--        {% endfor %}-->
+<!--    </ul>-->
+<!--    {% endif %}-->
+<!--    {% endwith %}-->
+<!--    </p>-->
+<!--    {% if filename %}-->
+<!--    <div>-->
+<!--        <img src="{{ url_for('display_image', filename=filename) }}">-->
+<!--    </div>-->
+<!--    {% endif %}-->
+
+<!--    &lt;!&ndash;    <button class="btn-dark" type="button">Button</button>&ndash;&gt;-->
+<!--    <form method="post" action="" enctype="multipart/form-data">-->
+<!--        <input type="file" id="upload" name="file" hidden/>-->
+<!--        <label class="btn btn-icon btn-primary"-->
+<!--               style="box-shadow: 0 3px 3px 0 rgba(19, 3, 6, 0.15), 0 3px 1px -2px rgba(10, 0, 3, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.15)"-->
+<!--               for="upload">-->
+<!--            <span class="btn-inner&#45;&#45;icon"><i class="fa fa-cloud-upload"></i></span>-->
+<!--            <span class="btn-inner&#45;&#45;text">Upload image</span>-->
+<!--        </label>-->
+
+
+<!--        <button class="btn btn-icon btn-2 btn-primary"-->
+<!--                style="margin-left: 2% ; box-shadow: 0 3px 3px 0 rgba(19, 3, 6, 0.15), 0 3px 1px -2px rgba(10, 0, 3, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.15)"-->
+<!--                type="submit">-->
+<!--            <span class="btn-inner&#45;&#45;icon" style="color: #66d432"><i class="fa fa-check"></i></span>-->
+<!--            <span class="btn-inner&#45;&#45;text">Prediction</span>-->
+<!--        </button>-->
+
+<!--            <img src="{{ url_for('identification_user', user=uploaded_image) }}" />-->
+
+
+<!--    </form>-->
+<!--</div>-->
+
+<!--&lt;!&ndash;<div align="center">&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="card" style="width: 50%; margin-top: 2%; margin-bottom: 2%">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="card-body">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="row">&ndash;&gt;-->
+<!--&lt;!&ndash;                <div class="col-md-12">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="card-image">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <img src="assets/images/demo.png" class="img-fluid" alt="">&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+<!--<div align="center">-->
+
+<!--</div>-->
+
+<!--{% endblock %}-->
+
+<!--</body>-->
+
+<!--</html>-->

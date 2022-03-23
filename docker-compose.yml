@@ -10,4 +10,4 @@ services:
         expose:
             - "5000"
         volumes:
-            - .app:/app
+            - ./app:/app

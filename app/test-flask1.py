@@ -23,8 +23,8 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Load pretrained models
-model_architecture_path = '../saved_model/model_identification_500users_40epochs.json'
-model_weights_path = '../saved_model/model_identification_500users_40epochs.h5'
+model_architecture_path = 'deployed_model/model_identification_500users_1Layer.json'
+model_weights_path = 'deployed_model/model_identification_500users_1Layer.h5'
 model = load_pretrained_model(model_architecture_path, model_weights_path)
 
 

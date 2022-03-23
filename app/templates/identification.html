@@ -19,25 +19,41 @@
 </div>
 
 <div align="center">
+
     <!--    <button class="btn-dark" type="button">Button</button>-->
+    <div>
+        <form method="post" id="upload-file" action="" enctype="multipart/form-data">
+            <input type="file" id="imageUpload" name="file" accept=".png, .jpg, .jpeg" hidden/>
+            <label class="btn btn-icon btn-primary"
+                   style="box-shadow: 0 3px 3px 0 rgba(19, 3, 6, 0.15), 0 3px 1px -2px rgba(10, 0, 3, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.15)"
+                   for="imageUpload">
+                <span class="btn-inner--icon"><i class="fa fa-cloud-upload"></i></span>
+                <span class="btn-inner--text"> Upload image</span>
+            </label>
+        </form>
+    </div>
 
-    <input type="file" id="upload" hidden/>
-    <label class="btn btn-icon btn-primary"
-           style="box-shadow: 0 3px 3px 0 rgba(19, 3, 6, 0.15), 0 3px 1px -2px rgba(10, 0, 3, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.15)"
-           for="upload">
-        <span class="btn-inner--icon"><i class="fa fa-cloud-upload"></i></span>
-        <span class="btn-inner--text">Upload image</span>
-    </label>
+    <div class="image-section" style="display:none;">
+        <div class="img-preview">
+            <div id="imagePreview">
+            </div>
+        </div>
+        <div class="btn-section">
+            <button class="btn btn-lg btn-icon btn-2 btn-primary" id="btn-predict"
+                    style="margin-top: 1% ; box-shadow: 0 3px 3px 0 rgba(19, 3, 6, 0.15), 0 3px 1px -2px rgba(10, 0, 3, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.15)"
+                    type="button">
+                <span class="btn-inner--icon" style="color: #66d432"><i class="fa fa-check"></i></span>
+                <span class="btn-inner--text">Prediction</span>
+            </button>
+        </div>
+    </div>
 
+    <div class="loader" style="display:none;"></div>
 
-    <button class="btn btn-icon btn-2 btn-primary"
-            style="margin-left: 2% ; box-shadow: 0 3px 3px 0 rgba(19, 3, 6, 0.15), 0 3px 1px -2px rgba(10, 0, 3, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.15)"
-            type="button">
-        <span class="btn-inner--icon" style="color: #66d432"><i class="fa fa-check"></i></span>
-        <span class="btn-inner--text">Prediction</span>
-    </button>
+    <h3 id="result" style="color: whitesmoke">
+        <span> </span>
+    </h3>
 </div>
-
 <!--<div align="center">-->
 <!--    <div class="card" style="width: 50%; margin-top: 2%; margin-bottom: 2%">-->
 <!--        <div class="card-body">-->
@@ -52,9 +68,6 @@
 <!--    </div>-->
 <!--</div>-->
 
-<div align="center">
-
-</div>
 
 {% endblock %}
 
