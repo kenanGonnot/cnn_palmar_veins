@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends "base.html"%}
+{% block title %}Palm veins recognition{% endblock %}
+{% block content %}
+
+<body class="g-sidenav-show bg-dark" background-color="#344767">
+
+<div align="center">
+    <div class="card" style="width: 40%; margin-top: 2%; margin-bottom: 2%">
+        <div class="card-body" style="cursor: pointer;">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card-image">
+                        <img src="static/images/demo.png" class="img-fluid" alt="" onclick=location.href="" >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div align="center" style="text-align: -webkit-center;">
+    <!--    <img src="assets/images/demo.png" class="center" align="center" width=40% display="block" text-align="center">-->
+    <h3 style="color: whitesmoke; margin-top: 1.5%">Palm veins recognition</h3>
+    <p> {{content}}</p>
+</div>
+
+<div align="center">
+    <!--    <button class="btn-dark" type="button">Button</button>-->
+
+    <button class="btn btn-icon btn-primary" onclick="location.href='identification'"
+            style="box-shadow: 0 3px 3px 0 rgba(19, 3, 6, 0.15), 0 3px 1px -2px rgba(10, 0, 3, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.15)"
+            type="button">
+        <span class="btn-inner--icon" style="color: azure"><i class="fa fa-id-badge"></i></span>
+        <span class="btn-inner--text">Palm veins identification</span>
+    </button>
+
+    <button class="btn btn-icon btn-2 btn-primary" onclick="location.href='verification'"
+            style="margin-left: 2% ; box-shadow: 0 3px 3px 0 rgba(19, 3, 6, 0.15), 0 3px 1px -2px rgba(10, 0, 3, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.15)"
+            type="button">
+        <span class="btn-inner--icon"><i class="fa fa-check-circle-o"></i></span>
+        <span class="btn-inner--text">Palm veins verification</span>
+    </button>
+</div>
+
+{% endblock %}
+
+
+
+</body>
+
+</html>

@@ -1,14 +1,20 @@
-FROM python:3.8-alpine
+FROM jupyter/tensorflow-notebook
+
+#RUN mkdir "/app"
+#USER root
+#RUN mkdir -p "/app/uploads"
+#RUN chmod -R 777 "/app/uploads"
+#USER jovyan
 WORKDIR /app
+COPY . .
 
-#RUN apk --update --upgrade add --no-cache  gcc musl-dev jpeg-dev zlib-dev libffi-dev cairo-dev pango-dev gdk-pixbuf-dev
 
-RUN python -m pip install --upgrade pip
-COPY requirements.txt requirements.txt
+#RUN python -m pip install --upgrade pip setuptools wheel
+#RUN python -m pip install --upgrade pip setuptools wheel
+#COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
-EXPOSE 5000
-
-COPY . /app
 
 CMD [ "python", "app.py" ]
+
+EXPOSE 5000

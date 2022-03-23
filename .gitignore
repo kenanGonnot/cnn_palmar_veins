@@ -78,3 +78,15 @@ fabric.properties
 
 !/.ipynb_checkpoints/
 !/capture_screen/
+!/app/deployed_model/model_identification_500users_2layers.h5
+
+!/app/deployed_model/model_identification_500users_2layers.json
+!/saved_model/model_500users_30epochs.h5
+
+!/saved_model/model_identification_500users_60train40test.h5
+
+!/saved_model/model_identification_500users_60train40test.json
+
+!/saved_model/resnet50v2TL_20epochs_32batch.h5
+
+!/saved_model/resnet150v2TL_20epochs_32batch.h5

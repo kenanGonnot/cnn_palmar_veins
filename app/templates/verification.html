@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends "base.html"%}
+
+{% block content %}
+
+<body class="g-sidenav-show bg-dark" background-color="#344767">
+
+
+<div align="center">
+    <!--    <img src="assets/images/demo.png" class="center" align="center" width=40% display="block" text-align="center">-->
+    <button class="btn btn-icon btn-2 btn-primary" onclick="location.href='/'"
+            style="margin-top: 1% ; box-shadow: 0 3px 3px 0 rgba(19, 3, 6, 0.15), 0 3px 1px -2px rgba(10, 0, 3, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.15)"
+            type="button">
+        <span class="btn-inner--icon" style="color: whitesmoke"><i class="fa fa-home"></i></span>
+        <span class="btn-inner--text">Home</span>
+    </button>
+    <h3 style="color: whitesmoke; margin-bottom: 2%; margin-top: 1.5%">Palm veins verification</h3>
+</div>
+
+<!-- create login form -->
+<div align="center">
+    <!--    <button class="btn-dark" type="button">Button</button>-->
+
+    <form action="" method="post" enctype="multipart/form-data">
+        <div class="input-group input-group-outline" style="width: 220px; height: 40px; border-radius: 5px">
+            <!--        <label class="form-label"> ::before "Name" ::after</label>-->
+            <input type="text" name="username" class="form-control" placeholder="Name" onfocus="focused(this)"
+                   style="width:204px;height:40px; color: whitesmoke">
+        </div>
+
+        <input type="file" id="upload" hidden/>
+        <label class="btn btn-icon btn-primary"
+               style="margin: 2%;box-shadow: 0 3px 3px 0 rgba(19, 3, 6, 0.15), 0 3px 1px -2px rgba(10, 0, 3, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.15)"
+               for="upload">
+            <span class="btn-inner--icon"><i class="fa fa-cloud-upload"></i></span>
+            <span class="btn-inner--text">Upload image</span>
+        </label>
+
+        <button class="btn btn-icon btn-2 btn-primary"
+                style="margin-top: 1% ; box-shadow: 0 3px 3px 0 rgba(19, 3, 6, 0.15), 0 3px 1px -2px rgba(10, 0, 3, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.15)"
+                type="submit" value="submit">
+            <span class="btn-inner--icon" style="color: whitesmoke"><i class="fa fa-send"></i></span>
+            <span class="btn-inner--text">Submit</span>
+        </button>
+    </form>
+
+    {% endblock %}
+
+</div>
+</div>
+
+<!--<div align="center">-->
+<!--    <div class="card" style="width: 50%; margin-top: 2%; margin-bottom: 2%">-->
+<!--        <div class="card-body">-->
+<!--            <div class="row">-->
+<!--                <div class="col-md-12">-->
+<!--                    <div class="card-image">-->
+<!--                        <img src="assets/images/demo.png" class="img-fluid" alt="">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<div align="center">
+
+</div>
+
+
+</body>
+
+</html>
