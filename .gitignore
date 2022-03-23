@@ -90,3 +90,4 @@ fabric.properties
 !/saved_model/resnet50v2TL_20epochs_32batch.h5
 
 !/saved_model/resnet150v2TL_20epochs_32batch.h5
+!/.ipynb_checkpoints/
