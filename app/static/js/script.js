@@ -14,7 +14,7 @@ class ImageUpload extends React.Component {
       var xhr = new XMLHttpRequest();
       var z = this;
 
-      xhr.open('post', '/api/image', true);
+      xhr.open('post', '/app/uploads', true);
 
       xhr.onload = function () {
         if (this.status == 200) {
