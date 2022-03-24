@@ -71,10 +71,11 @@ fabric.properties
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
 
-/data/chest_xray/
-/data/chest_xray/
-/data/
-/data/chest_xray/
+/data/archive/
+/data/data_palm_vein/Blue
+/data/data_palm_vein/Green
+/data/data_palm_vein/Red
+
 
 !/.ipynb_checkpoints/
 !/capture_screen/
@@ -91,3 +92,5 @@ fabric.properties
 
 !/saved_model/resnet150v2TL_20epochs_32batch.h5
 !/.ipynb_checkpoints/
+
+.ipynb_checkpoints/
