@@ -1,10 +1,8 @@
-import os
-
 import numpy as np
+import os
 from PIL.Image import Image
 from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory
 from load import init, model_predict
-from utils import decode_request
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
@@ -13,11 +11,9 @@ list_users = ["kenan", "faycal", "lorenzo"]
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
-
-#set paths to upload folder
+# set paths to upload folder
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 app.config['IMAGE_UPLOADS'] = os.path.join(APP_ROOT, 'static')
-
 
 model_architecture_path = "deployed_model/model_identification_500users_1Layer.json"
 model_weights_path = "deployed_model/model_identification_500users_1Layer.h5"
@@ -30,16 +26,9 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-
-
 @app.route('/')
 def home():
     return render_template('home.html')
-
-
-@app.route('/test/')
-def test():
-    return render_template('test.html', content=["hugo", "patrik", "dandy"], r=2)
 
 
 @app.route('/identification', methods=["POST", "GET"])
@@ -50,22 +39,12 @@ def identification():
         file_path = os.path.join(basepath, 'uploads', secure_filename(f.filename))
         f.save(file_path)
 
-        # image = request.files['input_file']
-        # filename = f.filename
-        # file_path = os.path.join(app.config["IMAGE_UPLOADS"], filename)
-        # image_pil = Image.open(f)
-        # image_pil.thumbnail((128, 128), Image.ANTIALIAS)
-        # image_pil.save(file_path)
-
-        # imgData = request.get_data()
-        # print("imgData: ", imgData)
-        # prediction = model_predict(imgData, model)
-        # prediction = model_predict(f, model)
         prediction = model_predict(file_path, model)
         pred_class = np.argmax(prediction) + 1
         result = str(pred_class)
         return result
     return render_template('identification.html')
+
 
 # def identification():
 #     # Check if a valid image file was uploaded
@@ -132,11 +111,6 @@ def connected(usr):
 @app.route('/error/<error>')
 def error(error):
     return render_template('error.html', error=error)
-
-
-# @app.route('/admin')
-# def admin():
-#     return redirect(url_for('/home'))
 
 
 if __name__ == "__main__":

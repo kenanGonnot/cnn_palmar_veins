@@ -1,4 +1,5 @@
 import gc
+import base64
 
 import cv2
 import numpy as np
@@ -53,3 +54,9 @@ def model_predict(img_path, model):
     y_pred = model.predict(img)
     return y_pred
 
+
+# decode the image coming from the request
+def decode_request(req):
+    encoded = req["image"]
+    decoded = base64.b64decode(encoded)
+    return decoded
