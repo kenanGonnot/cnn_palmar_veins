@@ -16,7 +16,7 @@
 <p align="center">
   <a href="https://github.com/kenanGonnot/cnn_palmar_veins">
 
-![logo](app/static/images/demo.png)
+![logo](app/static/images/palm_veins_logo.png)
 
 <h3 align="center">Project Palm veins recognition</h3>
 
@@ -56,10 +56,10 @@
 
 ![About the project](./app/static/images/homepage.png)
 
-**GOAL :** Our goal is to train a model to recognize palm veins. "Palm veins" are the veins that are located on the palm
-of the hand and is unique to everyone like a fingerprint.
+**GOAL :** Our goal is to train a model to recognize the users of the palm veins. "Palm veins" are the veins that are
+located on the palm of the hand and is unique to everyone like a fingerprint.
 
-Here are some of the model we have trained :
+Here are some of the model we have trained without transfer learning:
 
 | Model           | Accuracy   | Loss     |
 |-----------------|------------|----------|
@@ -108,7 +108,7 @@ When every containers is running like this:
 ![Image of login Page](app/static/images/homepage.png)
 
 Now you can see the web app running. The application is running on port 5000 on mode `debug` and the web app is
-accessible. 
+accessible.
 
 You can go to the "palm veins identification" page.
 
@@ -144,11 +144,12 @@ docker-compose build
 
 ## Contact
 
-* Kenan - [Github](https://github.com/kenanGonnot)  - [LinkedIn](https://www.linkedin.com/in/kenan-gonnot/)
-* Fayçal - [Github](https://github.com/Rellfix)  - [LinkedIn](https://www.linkedin.com/)
-* Lorenzo - [Github](https://github.com/Lorenzo089) - [LinkedIn](https://www.linkedin.com)
+Student: 
+* Kenan 
+* Fayçal
+* Lorenzo 
 
-Tuteur : Larbi BOUBCHIR - [larbi.boubchir@esme.fr](larbi.boubchir@esme.fr)
+Tuteur : Larbi BOUBCHIR 
 
 Project link: [Palm veins recognition](https://github.com/kenanGonnot/cnn_palmar_veins)
 
