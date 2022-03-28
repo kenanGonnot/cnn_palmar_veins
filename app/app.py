@@ -15,8 +15,10 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 app.config['IMAGE_UPLOADS'] = os.path.join(APP_ROOT, 'static')
 
-model_architecture_path = "deployed_model/model_identification_500users_1Layer.json"
-model_weights_path = "deployed_model/model_identification_500users_1Layer.h5"
+# model_architecture_path = "deployed_model/model_identification_500users_1Layer.json"
+# model_weights_path = "deployed_model/model_identification_500users_1Layer.h5"
+model_architecture_path = "deployed_model/XceptionWithoutTL.json"
+model_weights_path = "deployed_model/XceptionWithoutTL.h5"
 
 model = init(model_architecture_path, model_weights_path)
 
